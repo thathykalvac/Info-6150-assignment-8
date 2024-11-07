@@ -84,13 +84,18 @@ router.get('/user/getAll', async (req, res) => {
 // POST: Upload Image
 router.post('/user/uploadImage', upload.single('image'), async (req, res) => {
     const { email } = req.body;
+    if (!req.file) {
+        return res.status(400).json({ message: 'Image upload failed. Please ensure the file is JPEG, PNG, or GIF format.' });
+    }
+
     try {
         const user = await User.findOne({ email });
         if (!user) return res.status(404).json({ message: 'User not found' });
 
         user.imagePath = req.file.path;
         await user.save();
-        res.status(200).json({ message: 'Image uploaded', path: req.file.path });
+
+        res.status(200).json({ message: 'Image uploaded successfully', path: req.file.path });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
