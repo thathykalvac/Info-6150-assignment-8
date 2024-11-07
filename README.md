@@ -43,9 +43,24 @@ This project is a RESTful API for managing users, including functionalities for 
 
 ### Create User
 ```json
-POST /user/create
+Endpoint: POST /user/create
 {
   "email": "user@example.com",
   "fullName": "John Doe",
   "password": "StrongPass@123"
 }
+Endpoint: GET /user/getAll
+Endpoint: DELETE /user/delete
+{
+  "email": "user@example.com"
+}
+Endpoint: PUT /user/edit
+{
+  "email": "user@example.com",
+  "fullName": "John Doe",
+  "password": "StrongPass@123"
+}
+Endpoint: POST /user/uploadImage
+using form-data
+image: path 
+email: email of user
